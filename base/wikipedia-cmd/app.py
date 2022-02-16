@@ -261,10 +261,11 @@ def app(base_url):
                             os.system("cls")
                         if '-s' in a:
                             print("[rgb(200,200,50)]Restarting . . .[/]")
-                            os.system(f"C:/Users/joach/pythonPatch2/python.exe d:/eksperymenty/wiki/app.py")
+                            if check("https://en.wikipedia.org/"):
+                                return
                             return
                         print("[rgb(200,200,50)]Restarting . . .[/]")
-                        os.system(f"C:/Users/joach/pythonPatch2/python.exe d:/eksperymenty/wiki/app.py {base}")
+                        check(base)
                         return
                     case ["get",url,*a]:
                         args={}
@@ -308,8 +309,10 @@ def app(base_url):
                             os.system(f"ping {base.split('/')[2]}")
                         elif (len(args)>=2)and((args[0]=="-c")|(args[0]=="-chan"))and(check(args[1],noOpen=True)==True):
                             base=args[1]
-                            os.system(f"C:/Users/joach/pythonPatch2/python.exe d:/eksperymenty/wiki/app.py {args[1]}")
-                            return
+                            if check(base)==True:
+                                return
+                            else:
+                                print("Faild to change server")
                     case ['get_links',*url]:
                         for i in url:
                             link_extration(i)
@@ -343,10 +346,10 @@ def app(base_url):
         """)
                         elif (len(o)>=2)and(o[0]in["-c","-chan"])and(o[1]in ["en","ja","de","fr","it","pl",'ru',"es","zh","pt"]):
                             base='https://'+o[1]+".wikipedia.org/"
-                            if check(base,noOpen=True)==True:
-                                os.system(f"C:/Users/joach/pythonPatch2/python.exe d:/eksperymenty/wiki/app.py {base}")
+                            if check(base)==True:
                                 return
-                    
+                            else:
+                                print("Somthing is wrong back to last sesion")
                     case ["help",*o]:
                         print("""
         exit               : exit program
