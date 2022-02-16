@@ -400,5 +400,5 @@ def check(base,noOpen=False):
             return True
     else: print(f"[red]WIKIPEDIA SERVERS OFF[/]:{base}");return False
 
-
-check(base)
+if __name__ == '__main__':
+    check(base)
