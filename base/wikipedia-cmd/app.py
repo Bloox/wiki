@@ -1,7 +1,4 @@
-from asyncio import exceptions
-from hashlib import algorithms_guaranteed
-from unittest.mock import patch
-from xml.etree.ElementPath import prepare_parent
+
 import requests as r
 from bs4 import BeautifulSoup
 import os,sys,webbrowser

@@ -1,0 +1,17 @@
+Metadata-Version: 2.1
+Name: Terminal-wikipedia
+Version: 0.0.1
+Summary: Wki terminal!
+Home-page: UNKNOWN
+Author: random guy from internet
+Author-email: j*****.*****@gmail.com
+License: UNKNOWN
+Description: # Who don't like terminal,
+         now you can exploer wikipedia in terminal!
+Keywords: python,tool,terminal app,wikipedia
+Platform: UNKNOWN
+Classifier: Development :: mayby later (planning)
+Classifier: Intended Audienc :: terminal lovers
+Classifier: Programing Language :: python :: 3
+Classifier: Operating System :: Microsoft :: Windows
+Description-Content-Type: text/markdown
