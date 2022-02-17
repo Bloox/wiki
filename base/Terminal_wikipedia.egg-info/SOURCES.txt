@@ -1,0 +1,8 @@
+setup.py
+Terminal_wikipedia.egg-info/PKG-INFO
+Terminal_wikipedia.egg-info/SOURCES.txt
+Terminal_wikipedia.egg-info/dependency_links.txt
+Terminal_wikipedia.egg-info/requires.txt
+Terminal_wikipedia.egg-info/top_level.txt
+wikipedia-cmd/__init__.py
+wikipedia-cmd/app.py

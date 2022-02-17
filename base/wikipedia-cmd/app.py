@@ -11,6 +11,7 @@ except:
     base="https://en.wikipedia.org/"
 #/wiki/Special:Random
 memo={42:"https://en.wikipedia.org/wiki/42_(number)",43:[],424224067:["https://en.wikipedia.org/wiki/42_(number)"],424224068:[[]]}
+
 def url_gen(url):
     global memo
     if url=='_':
@@ -55,6 +56,11 @@ def link_extration(url):
             print(i.parent.text,": [rgb(0,100,255)]"+i.text+"[/]   ","link: "+i["href"])
         except KeyError:
             print(i.text,None)
+def get_table(url):
+    g=url_gen(url)
+    newsite=BeautifulSoup(g.text)
+    
+    print(len(newsite.select_one('.infobox')))
 def parser(ctx,d,ol_enumer=False,not_indent=False,show_url=False):
 
     if not_indent==True:
@@ -253,7 +259,7 @@ def app(base_url):
         cmd=cmd.split(" ")
         try:
             match cmd:
-                
+                    
                     case ["exit",*o]:
                         return
                     case ["restart"|"r",*a]:
@@ -261,11 +267,12 @@ def app(base_url):
                             os.system("cls")
                         if '-s' in a:
                             print("[rgb(200,200,50)]Restarting . . .[/]")
-                            if check("https://en.wikipedia.org/"):
+                            if check("https://en.wikipedia.org/",noOpen=True):
+                                os.system(f'py {sys.argv[0]} https://en.wikipedia.org/')
                                 return
                             return
                         print("[rgb(200,200,50)]Restarting . . .[/]")
-                        check(base)
+                        os.system(f'py {sys.argv[0]} {base}')
                         return
                     case ["get",url,*a]:
                         args={}
@@ -309,8 +316,8 @@ def app(base_url):
                             os.system(f"ping {base.split('/')[2]}")
                         elif (len(args)>=2)and((args[0]=="-c")|(args[0]=="-chan"))and(check(args[1],noOpen=True)==True):
                             base=args[1]
-                            if check(base)==True:
-                                return
+                            if check(base,True)==True:
+                                os.system(f'py {sys.argv[0]} {base}')
                             else:
                                 print("Faild to change server")
                     case ['get_links',*url]:
@@ -346,7 +353,8 @@ def app(base_url):
         """)
                         elif (len(o)>=2)and(o[0]in["-c","-chan"])and(o[1]in ["en","ja","de","fr","it","pl",'ru',"es","zh","pt"]):
                             base='https://'+o[1]+".wikipedia.org/"
-                            if check(base)==True:
+                            if check(base,False)==True:
+                                os.system(f'py {sys.argv[0]} {base}')
                                 return
                             else:
                                 print("Somthing is wrong back to last sesion")
@@ -369,6 +377,7 @@ def app(base_url):
         history            : list of site that you visit
         v                  : check global varibles ! and modify them
         last               : check last url
+        get_table          : print summary table from wikipedia
         """)
                     case ["v",*e]:
                         l=len(e)
@@ -377,6 +386,8 @@ def app(base_url):
                         elif l==1:
                             if e[0] in memo:
                                 print(e,memo[e[0]])
+                        elif l==2:
+                            memo[e[0]]=e[1]
                     case ['last',*a]:
                         if len(a)==1:
                             try:
@@ -387,6 +398,8 @@ def app(base_url):
                             print(memo[42])
                     case ['history']:
                         print(memo[43])
+                    case ['get_table',l]:
+                        get_table(l)
         except Exception as ro:
             print("I have troble\n","ERROR LOG:")
             print(ro)
